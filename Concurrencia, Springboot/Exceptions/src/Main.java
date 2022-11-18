@@ -1,14 +1,9 @@
 public class Main {
     public static void main(String[] args) throws Exception {
         try {
-            checkedTwoExceptions(true);
-        } catch (RuntimeException e){
-            System.out.println("Runtime Exception");
-            throw new Exception();
-        } catch (Exception e) {
-            System.out.println("Exception Common");
-        } catch (Throwable e) {
-            System.out.println("Exception More High");
+            uncheckedTwoExceptions(false);
+        } catch (ArithmeticException | NullPointerException e) {
+            System.out.println("Arihmetic Exception");
         }
     }
     private static void checkedTwoExceptions(boolean flag) throws Exception {
@@ -16,6 +11,14 @@ public class Main {
             throw new Exception();
         } else {
             throw new RuntimeException();
+        }
+    }
+
+    private static void uncheckedTwoExceptions(boolean flag) throws Exception {
+        if (flag) {
+            throw new ArithmeticException();
+        } else {
+            throw new NullPointerException();
         }
     }
 
