@@ -1,14 +1,20 @@
 public class Main {
     public static void main(String[] args) throws Exception {
         try {
-            checkedException();
-        } catch (Exception e){
-            System.out.println(e.getMessage());
+            checkedTwoExceptions(true);
+        } catch (RuntimeException e){
+            System.out.println("Runtime Exception");
             throw new Exception();
-        } finally {
-            System.out.println("Hello");
+        } catch (Exception e) {
+            System.out.println("Exception Common");
         }
-
+    }
+    private static void checkedTwoExceptions(boolean flag) throws Exception {
+        if (flag) {
+            throw new Exception();
+        } else {
+            throw new RuntimeException();
+        }
     }
 
     //Checked Exceptions
