@@ -6,6 +6,12 @@ public class Main {
             System.out.println("Arihmetic Exception");
         }
     }
+
+    // Own Exception
+
+    public static void exampleCustomException() throws CustomException {
+        throw new CustomException();
+    }
     private static void checkedTwoExceptions(boolean flag) throws Exception {
         if (flag) {
             throw new Exception();
