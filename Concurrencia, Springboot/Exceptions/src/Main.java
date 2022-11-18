@@ -5,8 +5,9 @@ public class Main {
         } catch (Exception e){
             System.out.println(e.getMessage());
             throw new Exception();
-        }
+        } finally {
             System.out.println("Hello");
+        }
 
     }
 
