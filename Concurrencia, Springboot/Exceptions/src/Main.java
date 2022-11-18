@@ -1,12 +1,14 @@
 public class Main {
     public static void main(String[] args) {
-        // ArithmeticException
-        // Debido a que ocurre al momento de compilarse
-        exampleArithmeticException();
+        try {
+            checkedException();
+        } catch (Exception e){
+            System.out.println(e.getMessage());
+        }
     }
 
-    private void checkedException(){
-        throw new Exception();
+    private static void checkedException() throws Exception{
+            throw new Exception();
     }
 
     private static void exampleArithmeticException(){
