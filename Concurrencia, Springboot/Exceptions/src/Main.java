@@ -7,6 +7,8 @@ public class Main {
             throw new Exception();
         } catch (Exception e) {
             System.out.println("Exception Common");
+        } catch (Throwable e) {
+            System.out.println("Exception More High");
         }
     }
     private static void checkedTwoExceptions(boolean flag) throws Exception {
