@@ -71,20 +71,27 @@
     </div>
 
     <script>
+      // Cuando se busque separara toda la url en un antés y después del ?query=
       let aux = document.location.href.split("?query=");
+      //Como nos interesa solo lo que está después, aprovechamos el array obtenido y sacamos el seguno item
       let query = aux[1];
+      // Ahora en el input se pondrá esa palabra de la busqueda.
       document.getElementById("txtSearch").value = query;
 
       fetch("http://localhost:8080/api/search?query=" + query)
+      // Acá recibimos la respuesta y la transformamos a json
         .then((response) => response.json())
+        //Acá recibimos ese response.json y mediante un ciclo creamos todos los resultados
         .then((json) => {
           let html = "";
           for (let resultSearch of json) {
             html += getHtmlResultSearch(resultSearch);
           }
+          //Después de cargar toda la busqueda lo metemos en el elemento div con links
           document.getElementById("links").outerHTML = html;
         });
 
+        // Acá armamos la sección del navegador con el ciclo de arriab que tiene la consulta de la BD
       function getHtmlResultSearch(resultSearch) {
         return `<div class="result">
         <h3><a href="${resultSearch.url}" target="_blank">${resultSearch.title}</a></h3>
