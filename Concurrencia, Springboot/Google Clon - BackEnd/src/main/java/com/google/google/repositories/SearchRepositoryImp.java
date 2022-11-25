@@ -17,7 +17,7 @@ public class SearchRepositoryImp implements SearchRepository{
     @Transactional
     @Override
     public List<WebPage> search(String textSearch) {
-        String query = "FROM webpage WHERE description like :textSearch";
+        String query = "FROM WebPage WHERE description like :textSearch";
 
         return entityManager.createQuery(query)
                 .setParameter("textSearch", "%"+ textSearch +"%")
