@@ -23,4 +23,10 @@ public class SearchRepositoryImp implements SearchRepository{
                 .setParameter("textSearch", "%"+ textSearch +"%")
                 .getResultList();
     }
+
+    @Transactional
+    @Override
+    public void save(WebPage webPage) {
+        entityManager.merge(webPage);
+    }
 }
