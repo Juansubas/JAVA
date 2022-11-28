@@ -1,13 +1,16 @@
 package com.google.google.entities;
 
-import lombok.*;
+import lombok.EqualsAndHashCode;
+import lombok.Getter;
+import lombok.Setter;
+import lombok.ToString;
 
 import javax.persistence.*;
 
 @Entity
 @Table(name = "webpage")
-@ToString @EqualsAndHashCode
 @Getter @Setter
+@ToString @EqualsAndHashCode
 public class WebPage {
 
     @Id
@@ -24,7 +27,8 @@ public class WebPage {
     @Column(name = "description")
     private String description;
 
-    public  WebPage(){}
+    public WebPage() {
+    }
     public WebPage(String url) {
         this.url = url;
     }
