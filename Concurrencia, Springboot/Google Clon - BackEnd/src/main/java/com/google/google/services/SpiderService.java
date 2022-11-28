@@ -10,6 +10,9 @@ import java.io.InputStream;
 import java.io.InputStreamReader;
 import java.net.HttpURLConnection;
 import java.net.URL;
+import java.util.ArrayList;
+import java.util.Arrays;
+import java.util.List;
 import java.util.stream.Collectors;
 import java.util.stream.Stream;
 
@@ -28,18 +31,42 @@ public class SpiderService {
         String content = getWebContent(url);
         if (isBlank(content)) {return "";}
         //Ahora deseamos obtener el titulo y la descripción de la web
+        indexAndSaveWebPage(url, content);
+        saveLinks(content);
+    }
+
+    private void saveLinks(String content) {
+        List<String> links = getLinks(content);
+        links.stream().map(link -> new WebPage(link))
+                .forEach(webPage -> searchService.save(webPage));
+    }
+
+    public List<String> getLinks(String content) {
+        List<String> links = new ArrayList<>();
+
+        String[] splitHref =content.split("href=\"");
+
+        List<String> listHref = Arrays.asList(splitHref);
+        listHref.remove(0);
+
+        listHref.forEach(strHref -> {
+            String[] aux = strHref.split("\"");
+            links.add(aux[0]);
+        });
+
+        return  links;
+
+    }
+
+    private void indexAndSaveWebPage(String url, String content) {
         String title = getTitle(content);
         String description = getDescription(content);
-
 
         WebPage webPage = new WebPage();
         webPage.setDescription(description);
         webPage.setTitle(title);
         webPage.setUrl(url);
-        // COn esto la guardamos en la base de datos
         searchService.save(webPage);
-
-        return description;
     }
 
     public String getTitle(String content) {
